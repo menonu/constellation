@@ -12,13 +12,12 @@ pub struct State {
 
 pub const STATE: Item<State> = Item::new("state");
 
-
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct Config {
     pub name: String,
 }
 
-pub const CONFIUG: Item<Config> = Item::new("config");
+pub const CONFIG: Item<Config> = Item::new("config");
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub enum SunClass {
@@ -33,8 +32,28 @@ pub enum SunClass {
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct Sun {
+    pub name: String,
     pub sun_class: SunClass,
     pub luminosity: Uint64,
 }
 
+pub const SUN: Item<Sun> = Item::new("sun");
 
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+pub enum PlanetType {
+    Rock,
+    Ice,
+    Gas,
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+pub struct Planet {
+    pub name: String,
+    pub planet_type: PlanetType,
+    pub size: Uint64,
+    pub satellites: Option<()>,
+}
+
+pub type Planets = Vec<Planet>;
+
+pub const PLANETS: Item<Planets> = Item::new("planets");
