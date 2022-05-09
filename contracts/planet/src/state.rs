@@ -20,29 +20,20 @@ pub struct Config {
 pub const CONFIG: Item<Config> = Item::new("config");
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
-pub enum SunClass {
-    SuperGiant,
-    BrightGiant,
-    Giant,
-    SubGiant,
-    MainSequence,
-    SubDwarf,
-    WhiteDwarf,
+pub enum PlanetType {
+    Rock,
+    Ice,
+    Gas,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
-pub struct Sun {
+pub struct Planet {
     pub name: String,
-    pub sun_class: SunClass,
-    pub luminosity: Uint64,
+    pub planet_type: PlanetType,
+    pub size: Uint64,
+    pub satellites: Option<()>,
 }
 
-pub const SUN: Item<Sun> = Item::new("sun");
+pub type Planets = Vec<Planet>;
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
-
-pub struct ContractAddress(String);
-
-pub type PlanetContracts = Vec<ContractAddress>;
-
-pub const PLANETS: Item<PlanetContracts> = Item::new("planets");
+pub const PLANETS: Item<Planets> = Item::new("planets");
